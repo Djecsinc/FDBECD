@@ -12,7 +12,7 @@ $password = "gsyDQbfhOYFN6X1h6Ac4A9jp9xCszoRa";      // Contraseña de conexión
 // Conexión a PostgreSQL
 $conexion = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$password");
 
-if (!$conn) {
+if (!$conexion) {
     die("Error de conexión: " . pg_last_error());
 }
 
@@ -30,12 +30,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $query = "INSERT INTO usuarios (name, lastname, email, password, age) VALUES ('$name', '$lastname', '$email', '$password', '$age')";
 
         // Ejecutar la consulta
-        $result = pg_query($conn, $query);
+        $result = pg_query($conexion, $query);
 
         if ($result) {
             echo "Usuario agregado correctamente";
         } else {
-            echo "Error al agregar usuario: " . pg_last_error($conn);
+            echo "Error al agregar usuario: " . pg_last_error($conexion);
         }
     } else {
         echo "Faltan datos";
@@ -45,5 +45,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 // Cerrar la conexión
-pg_close($conn);
+pg_close($conexion);
 ?>
