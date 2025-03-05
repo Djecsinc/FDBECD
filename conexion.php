@@ -1,15 +1,17 @@
 <?php
-$servidor = "127.0.0.1";
-$usuario = "Djecs";  // El usuario predeterminado de Laragon es "root"
-$contrasena = "8264";   // Sin contraseña por defecto
-$bd = "users";  // Nombre de la base de datos que creaste
+// Parámetros de conexión a PostgreSQL (reemplaza con los valores de tu cadena de conexión)
+$host = "dpg-cv42qprqf0us73b4qolg-a";  // El host de tu base de datos en Render
+$port = "5432";                   // Puerto de PostgreSQL (por defecto)
+$dbname = "users_3d3a";  // Nombre de tu base de datos en Render
+$user = "users_3d3a_user";             // Usuario de conexión
+$password = "gsyDQbfhOYFN6X1h6Ac4A9jp9xCszoRa";      // Contraseña de conexión
 
-// Crear conexión
-$conexion = new mysqli($servidor, $usuario, $contrasena, $bd);
+// Conexión a PostgreSQL
+$conexion = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$password");
 
-// Comprobar la conexión
-if ($conexion->connect_error) {
-    die("Conexión fallida: " . $conexion->connect_error);
+if (!$conexion) {
+    die("Error de conexión a la base de datos");
+} else {
+    echo "Conexión exitosa";
 }
-echo "Conexión exitosa";
 ?>
