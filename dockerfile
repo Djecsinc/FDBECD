@@ -9,3 +9,5 @@ COPY . /var/www/html/
 
 # Exponer el puerto 80 para la web
 EXPOSE 80
+# Instalar la extensión PostgreSQL para PHP
+RUN apt-get update && apt-get install -y php-pgsql
