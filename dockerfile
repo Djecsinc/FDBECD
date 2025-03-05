@@ -1,13 +1,14 @@
-# Usa la imagen oficial de PHP desde Docker Hub
-FROM php:7.4-apache
+# Usa una imagen oficial de PHP con Apache y soporte para PostgreSQL
+FROM php:8.0-apache
 
-# Habilita mod_rewrite para Apache (si es necesario)
+# Habilitar mod_rewrite de Apache
 RUN a2enmod rewrite
 
-# Copia los archivos de tu proyecto al contenedor
+# Instalar la extensión de PostgreSQL para PHP
+RUN docker-php-ext-install pgsql pdo_pgsql
+
+# Copiar los archivos de tu aplicación al contenedor
 COPY . /var/www/html/
 
-# Exponer el puerto 80 para la web
-EXPOSE 80
-# Instalar la extensión PostgreSQL para PHP
-RUN apt-get update && apt-get install -y php-pgsql
+# Configuración adicional si es necesario
+WORKDIR /var/www/html
